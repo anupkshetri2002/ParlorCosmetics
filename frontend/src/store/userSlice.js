@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-    user : null
-}
+  user: {} // Initialize userId with an empty object
+};
+
   
   export const userSlice = createSlice({
     name: 'user',

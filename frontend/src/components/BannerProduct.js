@@ -1,11 +1,19 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { useNavigate } from 'react-router-dom';
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 const BannerProduct = () => {
+
+  const navigate = useNavigate();
+  const handleShopNow = () => {
+    navigate("/product-category?category=skinCare")
+    
+  }
+
   return (
     <div className="max-h-[500px] relative">
         <Swiper
@@ -35,7 +43,8 @@ const BannerProduct = () => {
               <h1 className="px-4  mini:text-7xl mobile:text-5xl text-xl font-bold text-[#F3F8FF]">
                 Shop<span className="text-[#49108B]"> Fast</span>
               </h1>
-              <button className=" mini:w-52  ml-2 mt-5 bg-[#E26EE5] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]">
+              <button className=" mini:w-52  ml-2 mt-5 bg-[#E26EE5] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]"
+              onClick={handleShopNow()}>
                 Shop Now
               </button>
             </div>
@@ -53,7 +62,8 @@ const BannerProduct = () => {
               <h1 className="px-4  mini:text-7xl mobile:text-5xl text-xl font-bold text-[#F3F8FF]">
                 Shop<span className="text-[#51ce89]"> Fast</span>
               </h1>
-              <button className=" mini:w-52  ml-7 mt-5 bg-[#f25c48] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]">
+              <button className=" mini:w-52  ml-7 mt-5 bg-[#f25c48] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]
+              " onClick={handleShopNow()}>
                 Shop Now
               </button>
             </div>
@@ -71,7 +81,7 @@ const BannerProduct = () => {
               <h1 className="px-4  mini:text-7xl mobile:text-5xl text-xl font-bold text-[#F3F8FF]">
                 Shop<span className="text-[#f1bb47]"> Fast</span>
               </h1>
-              <button className=" mini:w-52  ml-2 mt-5 bg-[#49ecb6] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]">
+              <button className=" mini:w-52  ml-2 mt-5 bg-[#49ecb6] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]"onClick={handleShopNow()}>
                 Shop Now
               </button>
             </div>
@@ -89,7 +99,7 @@ const BannerProduct = () => {
               <h1 className="px-4  mini:text-7xl mobile:text-5xl text-xl font-bold text-[#3b66a2]">
                 Shop<span className="text-[#29754b]"> Fast</span>
               </h1>
-              <button className=" mini:w-52  ml-7 mt-5 bg-[#f25c48] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]">
+              <button className=" mini:w-52  ml-7 mt-5 bg-[#f25c48] hover:bg-black hover:text-white text-[#13070f] text-[12px] py-1 px-2 transition-all duration-300 ease-in-out  mini:text-4xl mobile:text-3xl mobile:w-40 w-[6rem]" onClick={handleShopNow()}>
                 Shop Now
               </button>
             </div>
