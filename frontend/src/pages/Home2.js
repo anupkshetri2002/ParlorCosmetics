@@ -8,7 +8,7 @@ import CustomSwiper from "../components/CustomSwiper";
 
 const Home2 = () => {
   return (
-    <div className=" w-full p-2">
+    <div className=" w-full pt-24">
       <div className=" h-[30rem]">
         <Swiper pagination={true} modules={[Pagination]} className="mySwiper ">
           <SwiperSlide className="h-full">

@@ -8,7 +8,7 @@ const deleteBookingController = async(req,res)=>{
         const deleteProduct = await bookingsModel.deleteOne({ _id : bookingId})
 
         res.json({
-            message : "Product Deleted From Cart",
+            message : "Booking was Deleted",
             error : false,
             success : true,
             data : deleteProduct

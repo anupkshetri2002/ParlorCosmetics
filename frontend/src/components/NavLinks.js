@@ -31,23 +31,23 @@ const NavLinks = () => {
         <div key={link.name}>
           <div
             key={link.name}
-            className="px-3 text-left cursor-pointer text-[#75df4b] hover:underline text-xl mini:flex mini:text-xl"
+            className="text-left cursor-pointer text-[#75df4b] hover:underline text-xl mini:flex mini:text-xl"
             onClick={() => handleLinkClick(link.link)}
           >
             <div className="py-4">{link.name}</div>
           </div>
         </div>
       ))}
-      <div className="relative" key={21}>
+      <div className="relative pb-5" key={21}>
         <div
           key={"21"}
-          className="px-3 text-left cursor-pointer text-[#75df4b] hover:underline text-xl mini:flex mini:text-xl"
+          className=" text-left cursor-pointer text-[#75df4b] hover:underline text-xl mini:flex mini:text-xl"
           onClick={toggleDropdown}
         >
-          <div className="py-4">Pages</div>
+          <div className="py-4 pt-9">Pages</div>
         </div>
         {isDropdownOpen && (
-          <div className="absolute z-50 top-full mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+          <div className=" absolute z-50 top-full mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
             {pagesLink.map((link) => (
               <div
                 key={link.name}

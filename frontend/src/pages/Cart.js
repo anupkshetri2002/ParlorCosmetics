@@ -4,6 +4,7 @@ import Context from "../context";
 import displayINRCurrency from "../helpers/displayCurrency";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import KhaltiPayment from "./KhaltiPayment";
 const Cart = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -112,7 +113,7 @@ const Cart = () => {
     0
   );
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto pt-28">
       <div className="text-center text-lg my-3">
         {data.length === 0 && !loading && (
           <p className="bg-white py-5">No Data</p>
@@ -217,9 +218,9 @@ const Cart = () => {
                 <p>{displayINRCurrency(totalPrice)}</p>
               </div>
 
-              <button className="bg-blue-600 p-2 text-white w-full mt-2">
-                Payment
-              </button>
+              <div className="bg-gray-700 p-2 text-white w-full mt-2">
+                <KhaltiPayment totalprice={totalPrice}/>
+              </div>
             </div>
           )}
         </div>

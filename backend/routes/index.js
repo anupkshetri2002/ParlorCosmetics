@@ -34,6 +34,7 @@ const recoverPasswordController = require("../controller/user/resetPassword");
 const forgotPasswordController = require("../controller/user/forgotPassword");
 const getNotificationController = require("../controller/notification/getNotification");
 const createNotificationRoleController = require("../controller/notification/createNotificationRole");
+const paymentMethod = require("../controller/Khaltii/khaltiController");
 
 
 router.post("/signup", userSignUpController);
@@ -80,6 +81,7 @@ router.post("/reset", recoverPasswordController);
 router.get("/get-notifications", getNotificationController);
 router.post("/create-notification", createNotificationRoleController);
 
-
+//khalti
+router.post("/khalti-verify", paymentMethod)
 
 module.exports = router;

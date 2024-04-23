@@ -15,7 +15,7 @@ const AdminPanel = () => {
   }, [user]);
 
   return (
-    <div className="min-h-[calc(100vh-120px)] md:flex hidden">
+    <div className="min-h-[calc(100vh-120px)] md:flex hidden pt-[6.2rem]">
       <aside className="bg-white min-h-full  w-full  max-w-60 customShadow">
         <div className="h-32  flex justify-center items-center flex-col">
           <div className="text-5xl cursor-pointer relative flex justify-center">
@@ -35,17 +35,17 @@ const AdminPanel = () => {
 
         {/***navigation */}
         <div>
-          <nav className="grid p-4">
-            <Link to={"all-users"} className="px-2 py-1 hover:bg-slate-100">
+          <nav className="grid p-4 ">
+            <Link to={"all-users"} className="px-2 py-1 hover:bg-red-800">
               All Users
             </Link>
-            <Link to={"all-products"} className="px-2 py-1 hover:bg-slate-100">
+            <Link to={"all-products"} className="px-2 py-1 hover:bg-red-800">
               All Products
             </Link>
-            <Link to={"all-bookings"} className="px-2 py-1 hover:bg-slate-100">
+            <Link to={"all-bookings"} className="px-2 py-1 hover:bg-red-800">
               All Bookings
             </Link>
-            <Link to={"all-gallary"} className="px-2 py-1 hover:bg-slate-100">
+            <Link to={"all-gallary"} className="px-2 py-1 hover:bg-red-800">
               All Gallery
             </Link>
           </nav>

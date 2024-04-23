@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
-import { MdModeEdit } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 
 const AllBookings = () => {
   const [allBooking, setAllBookings] = useState([]);
@@ -101,8 +101,10 @@ const AllBookings = () => {
                 <td>{el?.date}</td>
                 <td>{el?.time}</td>
 
-                <td onClick={() => deleteBooking(el?._id)}>
-                  <MdModeEdit />
+                <td onClick={() => deleteBooking(el?._id)} className="flex justify-center items-center">
+                <MdDeleteForever
+                    className="text-3xl cursor-pointer hover:scale-150 hover:text-red-500 ease-in-out duration-300 "
+                  />
                 </td>
               </tr>
             );

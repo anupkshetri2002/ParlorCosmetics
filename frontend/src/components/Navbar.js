@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Context from "../context";
 import { setMode } from "../store/mainSlice";
+import Header from "./Header";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#A367B1]  ">
+    <nav className="bg-[#A367B1] fixed z-10 w-full">
       <div className=" flex items-center h-full font-medium justify-around ">
         <div className="z-[-10rem] p-5 mini:w-auto w-full flex justify-between ">
           <div className="md:cursor-pointer h-11 w-[5.1rem] ">
@@ -103,9 +104,11 @@ const Navbar = () => {
         <ul className="mini:flex hidden uppercase items-center gap-8 font-logo ">
           <li></li>
           <NavLinks />
+          <Header />
         </ul>
         <div className="mini:block hidden ">
           <Button />
+         
         </div>
         {/* Mobile Responsive */}
         <ul

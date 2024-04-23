@@ -20,7 +20,7 @@ const ContactUs = () => {
     console.log(conFom);
   };
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center pt-12 space-y-2">
+    <div className="h-full w-full flex flex-col items-center justify-center pt-24 space-y-2">
       <div className=" bg-[#fcf7ee] rounded-xl  w-[80%] flex flex-wrap justify-around ">
         <div className="h-full ">
           <div>

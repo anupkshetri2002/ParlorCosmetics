@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Context from "../context";
 import NotificationBox from "./NotificationBox";
 import { CiLogout } from "react-icons/ci";
+import Header from "./Header";
 
 const Button = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -100,6 +101,7 @@ const Button = () => {
           </div>
         </Link>
       )}
+      
     </div>
   );
 };
