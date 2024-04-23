@@ -1,8 +1,8 @@
-import React from 'react'
-import CategoryList from '../components/CategoryList'
-import BannerProduct from '../components/BannerProduct'
-import HorizontalCardProduct from '../components/HorizontalCardProduct'
-import VerticalCardProduct from '../components/VerticalCardProduct'
+import React from "react";
+import CategoryList from "../components/CategoryList";
+import BannerProduct from "../components/BannerProduct";
+import HorizontalCardProduct from "../components/HorizontalCardProduct";
+import VerticalCardProduct from "../components/VerticalCardProduct";
 import { MdCardMembership } from "react-icons/md";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { GiBoxUnpacking } from "react-icons/gi";
@@ -11,30 +11,50 @@ import { IoLeafOutline } from "react-icons/io5";
 import { IoEarthOutline } from "react-icons/io5";
 import { TbVaccineBottleOff } from "react-icons/tb";
 import { LuVegan } from "react-icons/lu";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import SummaryApi from "../common";
+import SearchProduct from "./SearchProduct";
 
 const Home = () => {
+  const user = useSelector((state) => state?.user?.user);
+
+const createSubscrtption = async () => {
+  try {
+    const response = await fetch(SummaryApi.subscribe.url, {
+      method: SummaryApi.subscribe.method,  
+      body: JSON.stringify({
+        userId: user._id,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data.message);
+    toast.success(data.message);
+  } catch (e) {
+    console.log(e);
+    toast.error(e.message);
+  }
+};
+
   return (
     <div>
-      <CategoryList/>
-      <BannerProduct/>
-
-      <HorizontalCardProduct category={"skinCare"} heading={"Skin Care Products"}/>
-      <HorizontalCardProduct category={"perfumes"} heading={"Perfumes"}/>
-
-      <VerticalCardProduct category={"nails"} heading={"Nail and cuticle products"}/>
-      <VerticalCardProduct category={"oralCare"} heading={"Oral hygiene products"}/>
-      <VerticalCardProduct category={"hairs"} heading={"Hair and scalp products"}/>
-      {/* <VerticalCardProduct category={"foot"} heading={"Foot Care products"}/>
-      <VerticalCardProduct category={"shaving"} heading={"Shaving Products"}/>
-      <VerticalCardProduct category={"babies"} heading={"Baby Products"}/>
-      <VerticalCardProduct category={"bath"} heading={"Bathing Products"}/>
-      <VerticalCardProduct category={"tinted"} heading={"Tinted Products"}/> */}
-
-<div className="mini:h-[200px] h-96 p-5 w-full flex mini:text-7xl text-5xl bg-[#ecdec1] mt-4 flex-col mini:flex-row ">
+      <CategoryList />
+      <BannerProduct />
+      <div className="mini:h-[200px] h-96 p-5 w-full flex mini:text-7xl text-5xl bg-[#ecdec1] mt-4 flex-col mini:flex-row ">
         <div className="flex mini:h-[200px] mini:w-[33%] w:full pt-8 mini:pl-28 h-full">
           <div className=" absolute pl-20 mini:text-2xl text-xl mobile:text-4xl  font-logo pt-2">
-            Membership
-            <br /> <p className="font-boldFont">Get a membership</p>{" "}
+          <button
+            onClick={createSubscrtption}
+            className="h-12 w-40 ml-2 bg-[#d2bfd3] hover:bg-black hover:text-white text-[#13070f] text-[18px] py-1 px-2 transition-all duration-300 ease-in-out"
+          >
+            Subscribe
+          </button>
+            <br /> <p className="font-boldFont">Get a Subscription</p>{" "}
           </div>
           <MdCardMembership />
         </div>
@@ -92,7 +112,6 @@ const Home = () => {
               </div>
 
               <div className="flex flex-row text-3xl mini:text-6xl">
-
                 {" "}
                 <LuVegan />{" "}
                 <h1 className="pl-7 text-xl mini:text-3xl">100% Vegan </h1>
@@ -108,8 +127,6 @@ const Home = () => {
                 <div className="text-4xl mini:text-6xl">
                   <IoChatbubblesOutline />
                   <h1 className="text-[18px]  mini:text-2xl font-boldFont">
-
-                    
                     Chat Us At Anytime
                   </h1>
                   <h1 className="text-[20px]">+977 9841583459</h1>
@@ -189,8 +206,26 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
+      <HorizontalCardProduct
+        category={"skinCare"}
+        heading={"Skin Care Products"}
+      />
+      <HorizontalCardProduct category={"perfumes"} heading={"Perfumes"} />
+      <VerticalCardProduct
+        category={"nails"}
+        heading={"Nail and cuticle products"}
+      />
+      <VerticalCardProduct
+        category={"oralCare"}
+        heading={"Oral hygiene products"}
+      />
+      <VerticalCardProduct
+        category={"hairs"}
+        heading={"Hair and scalp products"}
+      />
 
-export default Home
+    </div>
+  );
+};
+
+export default Home;

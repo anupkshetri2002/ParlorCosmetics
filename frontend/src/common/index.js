@@ -97,6 +97,26 @@ const SummaryApi = {
     url: `${backendDomin}/api/set-gallary-images`,
     method: "post",
   },
+  subscribe: {
+    url: `${backendDomin}/api/subscribe/`,
+    method: "post",
+  },
+  forgotPassword: {
+    url: `${backendDomin}/api/forgot/`,
+    method: "post",
+  },
+  recoverPassword: {
+    url: `${backendDomin}/api/reset/`,
+    method: "post",
+  },
+  getNotification : {
+    url: `${backendDomin}/api/get-notifications`,
+    method: "get",
+  },
+  updateNotification : {
+    url: `${backendDomin}/api/update-notification`,
+    method: "post",
+  },
 };
 
 export default SummaryApi;

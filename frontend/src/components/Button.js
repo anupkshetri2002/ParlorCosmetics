@@ -8,6 +8,8 @@ import ROLE from "../common/role";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Context from "../context";
+import NotificationBox from "./NotificationBox";
+import { CiLogout } from "react-icons/ci";
 
 const Button = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -68,13 +70,14 @@ const Button = () => {
         </div>
       )}
 
-      <div>
+      <div className="flex items-center">
+        {user?._id && <NotificationBox />}
         {user?._id ? (
           <button
             onClick={handleLogout}
-            className="px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700"
+            className=" hover:bg-red-600 text-white font-bold py-2 px-4 flex rounded focus:outline-none focus:shadow-outline"
           >
-            Logout
+            <CiLogout /> <p className="text-xl">Logout</p>
           </button>
         ) : (
           <Link
@@ -87,18 +90,17 @@ const Button = () => {
       </div>
 
       {user?._id && (
-            <Link to={"/cart"} className="text-2xl relative">
-              <span>
-              <BsCart2 className="flex items-center" />
-    
-              </span>
+        <Link to={"/cart"} className="text-2xl relative">
+          <span>
+            <BsCart2 className="flex items-center" />
+          </span>
 
-              <div className="bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
-                <p className="text-sm">{context?.cartProductCount}</p>
-              </div>
-            </Link>
-          )}
-      </div>
+          <div className="bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
+            <p className="text-sm">{context?.cartProductCount}</p>
+          </div>
+        </Link>
+      )}
+    </div>
   );
 };
 

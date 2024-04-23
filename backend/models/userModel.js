@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    subscribed: Boolean || false,
     password: String,
     profilePic: String,
     role: String,

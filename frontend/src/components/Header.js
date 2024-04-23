@@ -100,19 +100,20 @@ const Header = () => {
             )}
 
             {menuDisplay && (
-              <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded">
-                <nav>
-                  {user?.role === ROLE.ADMIN && (
-                    <Link
-                      to={"/admin-panel/all-products"}
-                      className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
-                      onClick={() => setMenuDisplay((preve) => !preve)}
-                    >
-                      Admin Panel
-                    </Link>
-                  )}
-                </nav>
-              </div>
+              <div className="absolute bg-white bottom-0 top-11   right-0 left-0 p-2 shadow-lg rounded">
+              <nav>
+                {user?.role === ROLE.ADMIN && (
+                  <Link
+                    to="/admin-panel/all-products"
+                    className="block py-2 px-4 text-gray-800 hover:bg-gray-100 rounded transition duration-200 ease-in-out"
+                    onClick={() => setMenuDisplay(prev => !prev)}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+              </nav>
+            </div>
+            
             )}
           </div>
 
@@ -132,9 +133,9 @@ const Header = () => {
             {user?._id ? (
               <button
                 onClick={handleLogout}
-                className="px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                Logout
+                LogOut
               </button>
             ) : (
               <Link

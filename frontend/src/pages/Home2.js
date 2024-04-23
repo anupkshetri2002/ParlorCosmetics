@@ -4,7 +4,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
+import CustomSwiper from "../components/CustomSwiper";
 
 const Home2 = () => {
   return (
@@ -372,75 +372,44 @@ const Home2 = () => {
           </div>
         </div>
       </div>
-      <div className="h-[30rem] w-full flex">
-        <div className="h-full w-full ">
-          <div className="w-full flex justify-center flex-col">
-            <div className="w-full flex justify-center">
-              <h1 className="text-7xl font-logo3 text-[#EADFB4]">OUR SALON</h1>
-            </div>
-            <div className="h-full w-full mt-9">
-              <h1 className="text-xl  font-logo text-[#9BB0C1] items-center justify-center pl-3">
-                Welcome to Salon Beni! After being greeted by our friendly
-                staff, we invite you to enjoy our complimentary beverages and
-                home made snacks and relax in our fireplace seating area.
-              </h1>
-            </div>
-            <div className="h-full w-full mt-9">
-              <h1 className="text-xl  font-logo text-[#9BB0C1] items-center justify-center pl-3">
-                Our team takes part in ongoing continuing education. We build a
-                foundation by dedicating one night each week to provide our
-                apprentices with hands-on learning to develop their craft.{" "}
-              </h1>
-            </div>
-            <div className="h-full w-full mt-9">
-              <h1 className="text-xl  font-logo text-[#9BB0C1] items-center justify-center pl-3">
-                We continue stylist education through in-salon programs
-                including color formulating, cutting, and motivational speaking.
-                In addition, our staff frequently trains with the premier hair
-                stylists and product companies worldwide.{" "}
-              </h1>
-            </div>
-          </div>
-        </div>
-        <div className="h-full w-[40%]">
-          <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
+      <Swiper pagination={true} modules={[Pagination]} className="mySwiper ">
+      <SwiperSlide className="h-full">
+            <div className="w-full h-[30rem] bg-black">
               <img
-                className="absolute w-full h-full  object-cover  "
-                src="salon.jpg"
-                alt="salon"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                className="absolute w-full h-full  object-cover  "
+                className="absolute w-full h-full  object-cover opacity-50 "
                 src="salon1.jpg"
-                alt="salon1"
+                alt="salon1 "
               />
-            </SwiperSlide>
-            <SwiperSlide>
+              <div className="relative flex  flex-col items-start justify-center  flex-wrap  w-full h-full ">
+               
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="h-full">
+            <div className="w-full h-[30rem] bg-black">
               <img
-                className="absolute w-full h-full  object-cover  "
+                className="absolute w-full h-full  object-cover opacity-50 "
                 src="salon2.jpg"
                 alt="salon2"
               />
-            </SwiperSlide>
+              <div className="relative flex  flex-col items-start justify-center  flex-wrap  w-full h-full ">
+               
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="h-full">
+            <div className="w-full h-[30rem] bg-black">
+              <img
+                className="absolute w-full h-full  object-cover opacity-50 "
+                src="salon.jpg"
+                alt="salon"
+              />
+              <div className="relative flex  flex-col items-start justify-center  flex-wrap  w-full h-full ">
+               
+              </div>
+            </div>
+          </SwiperSlide>
           </Swiper>
-        </div>
-      </div>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const UploadProduct = ({
     category : "",
     productImage : [],
     description : "",
+    stock : "",
     price : "",
     sellingPrice : ""
   })
@@ -194,6 +195,17 @@ const UploadProduct = ({
                 placeholder='enter price' 
                 value={data.price} 
                 name='price'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-100 border rounded'
+                required
+              />
+              <label htmlFor='stock' className='mt-3'>Stock :</label>
+              <input 
+                type='number' 
+                id='stock' 
+                placeholder='enter stock' 
+                value={data.stock} 
+                name='stock'
                 onChange={handleOnChange}
                 className='p-2 bg-slate-100 border rounded'
                 required

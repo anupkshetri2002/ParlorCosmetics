@@ -29,12 +29,18 @@ const getGallaryImages = require("../controller/admin/getGallaryImages");
 const setGallaryImages = require("../controller/admin/setGallaryImages");
 const forgotPassword = require("../controller/user/forgotPassword");
 const passwordReset = require("../controller/user/resetPassword");
+const subscribeController = require("../controller/user/subscribeController");
+const recoverPasswordController = require("../controller/user/resetPassword");
+const forgotPasswordController = require("../controller/user/forgotPassword");
+const getNotificationController = require("../controller/notification/getNotification");
+const createNotificationRoleController = require("../controller/notification/createNotificationRole");
 
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
+router.post("/subscribe", subscribeController);
 
 //admin panel
 router.get("/all-user", authToken, allUsers);
@@ -67,7 +73,13 @@ router.get("/get-galary-images", getGallaryImages);
 router.post("/set-gallary-images", setGallaryImages);
 
 //forgot password routes
-router.post("/forgot", forgotPassword);
-router.post("/reset", passwordReset);
+router.post("/forgot", forgotPasswordController);
+router.post("/reset", recoverPasswordController);
+
+//notificatons
+router.get("/get-notifications", getNotificationController);
+router.post("/create-notification", createNotificationRoleController);
+
+
 
 module.exports = router;

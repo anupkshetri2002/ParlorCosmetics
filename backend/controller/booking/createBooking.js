@@ -8,7 +8,7 @@ async function createBookingController(req, res) {
 
     const staff = await bookingsModel.findOne({ staffId });
 
-    console.log("booking creating", staffId);
+    console.log("booking done", staffId);
 
     if (staff) {
       throw new Error("Booking of this staff exits.");
@@ -27,7 +27,7 @@ async function createBookingController(req, res) {
       data: saveBooking,
       success: true,
       error: false,
-      message: "Booking created Successfully!",
+      message: "Booking done Successfully!",
     });
   } catch (err) {
     res.json({

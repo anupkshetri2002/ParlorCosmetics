@@ -1,61 +1,79 @@
-const userModel = require("../../models/userModel");
-const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
-const randomstring = require("randomstring");
+const userModel = require("../../models/userModel");
 require("dotenv").config();
+const bycrypt = require("bcrypt");
+const passwordRecoveryModel = require("../../models/passwordRecoveryModel");
 
 ///otp to email
-const forgotPassword = async (req, res) => {
+const config = {
+  service: "gmail", // your email domain
+  auth: {
+    user: process.env.GMAIL_APP_USER, // your email address
+    pass: process.env.GMAIL_APP_PASSWORD, // your password
+  },
+};
+
+const transporter = nodemailer.createTransport(config);
+
+const forgotPasswordController = async (req, res) => {
   try {
     const { email } = req.body;
 
-    // Find the user by email
+    if (!email) {
+      throw new Error("Email is required");
+    }
+
+    // Check if user exists
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      throw new Error("User not found");
     }
 
-    // Generate a random OTP
-    let OTP = randomstring.generate({ length: 6, charset: "numeric" });
+    // Generate token
+    const token = Math.random().toString(36).slice(-8);
 
-    // Ensure OTP doesn't start with zero
-    while (OTP.length < 6 && OTP[0] === '0') {
-      OTP = '0' + OTP;
-    }
+    // Hash token
+    const salt = bycrypt.genSaltSync(10);
+    const hashedToken = await bycrypt.hash(token, salt);
 
-    // Store the OTP in the database
-    user.resetPasswordOTP = OTP;
-    await user.save();
+    // Delete previous tokens
+    await passwordRecoveryModel.deleteMany({ userId: user._id });
 
-    // Send the OTP to the user's email
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: process.env.GMAIL,
-        pass: process.env.PASSWORD_GMAIL,
-      },
+    // Save token to database
+    await passwordRecoveryModel.create({
+      userId: user._id,
+      token: hashedToken,
+      expirationDate: new Date(Date.now() + 3600000), // 1 hour
     });
 
-    const mailOptions = {
-      from: process.env.GMAIL,
+    // Email body
+    const emailBody = `
+          Recovery token: ${token}
+      `;
+
+    let message = {
+      from: process.env.GMAIL_APP_USER,
       to: email,
-      subject: "Forgot Password - OTP Verification",
-      text: `Your OTP for resetting the password is: ${OTP}`,//
+      subject: "Password Recovery",
+      text: emailBody,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(message);
 
-    res.status(200).json({ message: "OTP sent to your email" });
-  } catch (err) {
-    console.error("Error sending OTP:", err);
-
-   
+    res.json({
+      message: "Email sent",
+      error: false,
+      success: true,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message || error,
+      error: true,
+      success: false,
+    });
   }
 };
 
-
-// In forgotPassword.js
-module.exports = forgotPassword;
+module.exports = forgotPasswordController;
 
 // In passwordReset.js
-

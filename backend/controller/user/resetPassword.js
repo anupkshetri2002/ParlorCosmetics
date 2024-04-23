@@ -1,42 +1,66 @@
-const userModel = require("../../models/userModel");
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
-const randomstring = require("randomstring");
-require("dotenv").config();
+// Endpoint to recover password with recovery token
 
+const userModel = require('../../models/userModel');
+const passwordRecoveryModel = require('../../models/passwordRecoveryModel');
+const bycrypt = require('bcryptjs');
 
-
-// Reset password 
-const passwordReset = async (req, res, next) => {
+const recoverPasswordController = async (req, res) => {
     try {
-      const { email, OTP, newPassword } = req.body;
-  
-      // Find the user by email
-      const user = await userModel.findOne({ email });
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      // Validate the OTP
-      if (user.resetPasswordOTP !== OTP) {
-        return res.status(400).json({ message: "Invalid OTP please" });
-      }
-  
-      // Hash the new password
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(newPassword, salt);
-    
-  
-      // Update the user's password
-      user.password = hash;
-      user.resetPasswordOTP = null; // Clear the OTP
-      await user.save();
-  
-      res.status(200).json({ message: "Password reset successful" });
-    } catch (err) {
-      console.error("Error resetting password:", err);
-     
-    }
-  };
+        const { email, token, newPassword } = req.body;
 
-  module.exports = passwordReset;
+        if (!email || !token || !newPassword) {
+            throw new Error('All fields are required');
+        }
+
+        // Check if user exists
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Check if token exists
+        const recovery = await passwordRecoveryModel.findOne({ userId: user._id });
+        if (!recovery) {
+            throw new Error('Invalid token');
+        }
+
+        // Check if date is valid
+        if (recovery.expirationDate < new Date()) {
+            throw new Error('Token expired');
+        }
+
+        // Compare token
+        const isValid = await bycrypt.compare(token, recovery.token);
+        if (!isValid) {
+            throw new Error('Invalid token');
+        }
+
+        // Delete token
+        await passwordRecoveryModel.deleteOne({ userId: user._id });
+
+        // Update password
+        const salt = bycrypt.genSaltSync(10);
+        const hashPassword = await bycrypt.hashSync(newPassword, salt);
+
+        await userModel.updateOne({
+            _id: user._id
+        }, {
+            password: hashPassword
+        });
+
+        res.json({
+            message: 'Password updated successfully',
+            error: false,
+            success: true,
+        });
+
+    } catch (err) {
+        res.json({
+            message: err.message || err,
+            error: true,
+            success: false,
+        });
+    }
+}
+
+module.exports = recoverPasswordController;

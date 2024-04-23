@@ -17,6 +17,9 @@ import ContactUs from "../pages/ContactUs";
 import Booking from "../pages/Booking";
 import AllBookings from "../pages/AllBookings";
 import GalleryPage from "../pages/Gallery/Gallary";
+import AllGallary from "../pages/AllGallary";
+import RecoverPassword from "../pages/RecoverPassword";
+import ProfilePage from "../pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassowrd />,
+      },
+      {
+        path: "recover-password",
+        element: <RecoverPassword />,
       },
       {
         path: "booking",
@@ -72,6 +83,10 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+      {
         path: "gallary",
         element: <GalleryPage />,
       },
@@ -90,6 +105,10 @@ const router = createBrowserRouter([
           {
             path: "all-bookings",
             element: <AllBookings />,
+          },
+          {
+            path: "all-gallary",
+            element: <AllGallary />,
           },
         ],
       },
